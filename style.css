@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+    background-image: url("img/back.png");
+    font-family: 'Sour Gummy';
+}
 #gameFrame{
     background-color: green;
     margin-left: 35%;
@@ -5,4 +10,21 @@
 }
 h1{
     text-align: center;
+}
+h2{
+    text-align: center;
+}
+button{
+    font-size: 26px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(108, 187, 108);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-left: 47%;
+}
+button:hover{
+    background-color: gray;
 }
