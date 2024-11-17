@@ -1,40 +1,81 @@
 const canvas = document.getElementById("gameFrame");
 const ctx = canvas.getContext("2d");
+let speedX = 13;
+let speedY = 13;
+let snakeX = 0;
+let snakeY = 0;
+let width = 50;
+let height = 50;
 
-const snake = {
-    x: 100,
-    y:100,
-    vx:1,
-    vy:1,
-    width:50,
-    height:50,
-    color: "red",
-    draw(){
-        ctx.beginPath();
-        ctx.fillStyle  = this.color;
-        ctx.fillRect(this.x,this.y,this.width,this.height);
-        ctx.closePath();
-        
-    }
-};
+let count = 0;
 
-// function draw(){
-//     ctx.clearRect(0,0,canvas.width, canvas.height);
-//     snake.draw();
-//     snake.x += snake.vx;
-//     snake.y += snake.vy;
-//     raf = window.requestAnimationFrame(draw);
-// }
+window.onload = function () {
+    // setInterval(food,1000/1);
 
-addEventListener("keyup", (event)=>{
-    if(event.key == "ArrowLeft"){
-        ctx.clearRect(0,0,canvas.width, canvas.height);
+    setInterval(snake, 1000 /3);
+    
+}
 
-        snake.draw();
-        snake.x -= snake.vx + 10;
-        raf = window.requestAnimationFrame(draw);
-        
-    }
-})
 
-snake.draw();
+function food() {
+    let foodX = Math.floor(Math.random() * 380);
+    let foodY = Math.floor(Math.random() * 380);
+    ctx.fillRect(foodX, foodY, 30, 30);
+}
+
+function snake() {
+    ctx.clearRect(snakeX, snakeY, width, height);
+
+    console.log(count);
+    switch(count){
+        case 1:
+            snakeY += speedY;
+            break;
+        case -1:
+            snakeY -= speedY;
+            break;
+        case 2:
+            snakeX += speedX;
+            break;
+        case -2:
+            snakeX -= speedX;
+            break;
+            }
+
+    ctx.fillRect(snakeX, snakeY, width, height);
+}
+
+function changeDirection() {
+    document.addEventListener("keyup", (event) => {
+        if (event.key == "ArrowDown") {
+            ctx.clearRect(snakeX, snakeY, width, height);
+            snakeY += speedY;
+            ctx.fillRect(snakeX, snakeY, width, height);
+                count = 1;
+        } else if (event.key == "ArrowUp") {
+            ctx.clearRect(snakeX, snakeY, width, height);
+            snakeY -= speedY;
+            ctx.fillRect(snakeX, snakeY, width, height);
+            count = -1;
+
+        }
+        else if (event.key == "ArrowRight") {
+            ctx.clearRect(snakeX, snakeY, width, height);
+            snakeX += speedX;
+            ctx.fillRect(snakeX, snakeY, width, height);
+            count = 2;
+        }
+        else if (event.key == "ArrowLeft") {
+            ctx.clearRect(snakeX, snakeY, width, height);   
+            snakeX -= speedX;
+            ctx.fillRect(snakeX, snakeY, width, height);
+            count = -2;
+        }
+
+    })
+
+}
+changeDirection();
+
+
+food();
