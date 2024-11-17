@@ -18,9 +18,9 @@ let start = 0;
 
 // this function let's you start the game
 function Start(){
-    setInterval(food , 1000/3);
-    setInterval(snake, 1000 / 3);
-    setInterval(SnakeBorder,1000/3);
+    setInterval(food , 1000/4);
+    setInterval(snake, 1000 / 4);
+    setInterval(SnakeBorder,1000/4);
     
     
 }
@@ -30,7 +30,6 @@ function food() {
     ctx.fillRect(foodX, foodY, 10, 10);
     if(snakeX < foodX + 10 && snakeX + width > foodX && snakeY < foodY + 10 && snakeY + height > foodY ){
         ctx.clearRect(foodX,foodY,50,50);
-        console.log("snake size increases");
         foodX = Math.floor(Math.random() * 380);
         foodY = Math.floor(Math.random() * 380);
         width += 8;
@@ -38,12 +37,12 @@ function food() {
         score += 1;
         
     }
-    document.getElementById("score").innerHTML = "Score -" + score;
+    document.getElementById("score").innerHTML = "Score = " + score;
 }
 
 // for game reset if dead
 function SnakeBorder(){
-    if(snakeX > 460 || snakeX < 0  || snakeY <0 || snakeY >460 ){
+    if(snakeX > 460 || snakeX < 0  || snakeY < -2 || snakeY >490 ){
         console.log("you ran on border");
         alert("Game over");
         window.location.reload();
